@@ -1,0 +1,23 @@
+# Personal history and session data
+history.jsonl
+file-history/
+shell-snapshots/
+todos/
+ide/
+plugins/
+
+# Logs and backups
+logs/
+backups/
+
+# Local settings and personal data
+local/
+statsig/
+projects/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Personal state in settings (keep settings.json but be careful with sensitive data)
+# Note: Review settings.json before committing to remove personal information
