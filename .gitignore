@@ -9,6 +9,7 @@ plugins/
 # Logs and backups
 logs/
 backups/
+debug/
 
 # Local settings and personal data
 local/

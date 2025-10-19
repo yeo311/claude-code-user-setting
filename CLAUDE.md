@@ -2,78 +2,83 @@
 
 ## Workflow
 
-사용자가 작업을 지시했을 때는 다음 프로세스를 따릅니다.
+When a user assigns a task, follow this process:
 
-### 1. 요구사항 명확화
+### 1. Clarify Requirements
 
-사용자의 지시가 명확하고 구체적이지 않을 경우, Tech Spec을 작성하기 전에 다음 내용을 질문합니다:
+If the user's instructions are not clear and specific, ask about the following before writing the Tech Spec:
 
-- 작업의 목적과 배경
-- 구체적인 요구사항과 제약사항
-- 예상되는 결과물
-- 범위와 우선순위
-- 기술적 요구사항
+- Purpose and background of the task
+- Specific requirements and constraints
+- Expected deliverables
+- Scope and priorities
+- Technical requirements
 
-### 2. Tech Spec 작성
+### 2. Write Tech Spec
 
-요구사항을 명확히 파악한 후 Tech Spec을 Markdown으로 작성합니다. Tech Spec은 다음 내용을 포함해야 합니다:
+After clarifying requirements, write a Tech Spec in Markdown format. The Tech Spec should include:
 
 #### Background
-- 왜 이 작업이 필요한가?
-- 현재 상황과 문제점은 무엇인가?
+- Why is this task necessary?
+- What is the current situation and what problems exist?
 
 #### Goal
-- 무엇을 달성할 것인가?
-- 성공 기준은 무엇인가?
+- What will be achieved?
+- What are the success criteria?
 
 #### Non-Goal
-- 무엇을 하지 말아야 하는가?
-- 이번 작업의 범위를 벗어나는 것은 무엇인가?
+- What should not be done?
+- What is out of scope for this task?
 
 #### Proposed Changes
-- 구체적인 변경사항
-- 파일별 수정 내용
-- 구현 접근 방식
+- Specific changes to be made
+- Modifications per file
+- Implementation approach
 
-### 3. TODO Markdown 작성
+### 3. Write TODO Markdown
 
-Tech Spec을 바탕으로 구체적인 실행 계획을 세워 TODO Markdown 문서를 작성합니다. 이 문서에는 다음 내용이 포함되어야 합니다:
+Based on the Tech Spec, create a concrete execution plan in a TODO Markdown document. This document should include:
 
-- 세부적인 실행 Task 목록
-- Task별 우선순위 및 순서
-- 각 Task의 구체적인 작업 내용
-- Task 간 의존성 관계
+- Detailed list of execution tasks
+- Priority and order for each task
+- Specific work content for each task
+- Dependencies between tasks
 
-### 4. Task 실행 및 검증
+### 4. Execute and Verify Tasks
 
-각 Task를 진행할 때마다 다음 검증 프로세스를 반드시 수행합니다:
+For each task, perform the following verification process:
 
-1. **프로젝트 설정 확인**
-   - Formatter (예: Prettier, Black 등) 설정 확인
-   - Linter (예: ESLint, Pylint 등) 설정 확인
-   - Type Checker (예: TypeScript, mypy 등) 설정 확인
+1. **Use Context7 MCP**
+   - ALWAYS use Context7 MCP when writing or modifying code
+   - Context7 MCP provides enhanced code context and understanding capabilities
+   - This ensures better code quality and consistency across the codebase
 
-2. **검증 명령어 실행**
-   - 해당 프로젝트에 설정된 검증 도구의 명령어를 실행
-   - 모든 검증을 통과해야 Task 완료로 간주
+2. **Check Project Configuration**
+   - Verify formatter configuration (e.g., Prettier, Black, etc.)
+   - Verify linter configuration (e.g., ESLint, Pylint, etc.)
+   - Verify type checker configuration (e.g., TypeScript, mypy, etc.)
 
-3. **검증 실패 시**
-   - 발생한 오류를 수정
-   - 검증 명령어를 재실행하여 통과 확인
+3. **Run Verification Commands**
+   - Execute commands for the validation tools configured in the project
+   - Task is considered complete only when all verifications pass
 
-### 5. 코드 리뷰 및 피드백 반영
+4. **If Verification Fails**
+   - Fix the errors that occurred
+   - Re-run verification commands to confirm they pass
 
-Formatting, Linting, Type Checking이 모두 완료된 후 다음 프로세스를 진행합니다:
+### 5. Code Review and Feedback Integration
 
-1. **서브 에이전트를 통한 코드 리뷰**
-   - code-reviewer 에이전트를 실행하여 작성된 코드 리뷰 수행
-   - 코드 품질, 보안, 유지보수성 관점에서 검토
+After completing formatting, linting, and type checking, proceed with the following process:
 
-2. **피드백 반영**
-   - 코드 리뷰에서 제시된 피드백을 분석
-   - 개선이 필요한 부분을 수정
-   - 수정 후 다시 검증 프로세스(4단계) 수행
+1. **Code Review via Sub-Agent**
+   - Execute the code-reviewer agent to review the written code
+   - Review from the perspectives of code quality, security, and maintainability
 
-3. **최종 확인**
-   - 모든 피드백이 반영되었는지 확인
-   - 필요시 추가 리뷰 요청
+2. **Integrate Feedback**
+   - Analyze feedback from the code review
+   - Fix areas that need improvement
+   - Perform verification process (Step 4) again after fixes
+
+3. **Final Confirmation**
+   - Verify that all feedback has been integrated
+   - Request additional review if necessary
