@@ -16,7 +16,11 @@ If the user's instructions are not clear and specific, ask about the following b
 
 ### 2. Write Tech Spec
 
-After clarifying requirements, write a Tech Spec in Markdown format. The Tech Spec should include:
+After clarifying requirements, write a Tech Spec as a separate Markdown file (e.g., `SPEC.md` or `tech-spec-[feature-name].md`).
+
+**IMPORTANT: The Tech Spec MUST be written in Korean.**
+
+The Tech Spec should include:
 
 #### Background
 - Why is this task necessary?
@@ -35,7 +39,32 @@ After clarifying requirements, write a Tech Spec in Markdown format. The Tech Sp
 - Modifications per file
 - Implementation approach
 
-### 3. Write TODO Markdown
+### 3. Get User Approval on Tech Spec
+
+**IMPORTANT: Do NOT proceed to implementation without user approval of the Tech Spec.**
+
+After writing the Tech Spec markdown file:
+
+1. **Present the Tech Spec**
+   - Inform the user that the Tech Spec has been created
+   - Provide the file path to the Tech Spec markdown file
+   - Clearly indicate that this is a proposed specification awaiting approval
+
+2. **Request Feedback**
+   - Explicitly ask the user to review the Tech Spec file
+   - Request approval or revision requests
+   - Wait for user response before proceeding
+
+3. **Iterate Based on Feedback**
+   - If the user requests changes, update the Tech Spec file accordingly
+   - Re-present the updated spec for approval
+   - Repeat until the user gives final approval
+
+4. **Proceed Only After Approval**
+   - Only after receiving explicit user approval, move to the next step (Write TODO Markdown)
+   - Do NOT start writing code or creating TODO lists without approval
+
+### 4. Write TODO Markdown
 
 Based on the Tech Spec, create a concrete execution plan in a TODO Markdown document. This document should include:
 
@@ -44,7 +73,7 @@ Based on the Tech Spec, create a concrete execution plan in a TODO Markdown docu
 - Specific work content for each task
 - Dependencies between tasks
 
-### 4. Execute and Verify Tasks
+### 5. Execute and Verify Tasks
 
 For each task, perform the following verification process:
 
@@ -79,7 +108,7 @@ For each task, perform the following verification process:
    - Fix the errors that occurred
    - Re-run verification commands to confirm they pass
 
-### 5. Code Review and Feedback Integration
+### 6. Code Review and Feedback Integration
 
 After completing formatting, linting, and type checking, proceed with the following process:
 
