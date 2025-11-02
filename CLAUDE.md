@@ -16,57 +16,83 @@ If the user's instructions are not clear and specific, ask about the following b
 
 ### 2. Write Tech Spec
 
-After clarifying requirements, write a Tech Spec as a separate Markdown file (e.g., `SPEC.md` or `tech-spec-[feature-name].md`).
+**When to Write a Tech Spec:**
+
+- For complex feature implementations or significant modifications:
+  - Ask user (via `AskUserQuestion`) whether to create a Tech Spec document
+  - Proceed with Tech Spec creation only if user accepts
+
+- Skip Tech Spec for:
+  - Simple feature implementations or minor modifications
+  - When user declines the Tech Spec proposal
+
+**If writing a Tech Spec:**
+
+After clarifying requirements and receiving user approval, write a Tech Spec as a separate Markdown file (e.g., `SPEC.md` or `tech-spec-[feature-name].md`).
 
 **IMPORTANT: The Tech Spec MUST be written in Korean.**
 
 The Tech Spec should include:
 
 #### Background
+
 - Why is this task necessary?
 - What is the current situation and what problems exist?
 
 #### Goal
+
 - What will be achieved?
 - What are the success criteria?
 
 #### Non-Goal
+
 - What should not be done?
 - What is out of scope for this task?
 
 #### Proposed Changes
+
 - Specific changes to be made
 - Modifications per file
 - Implementation approach
 
 ### 3. Get User Approval on Tech Spec
 
+**Note: This section only applies if a Tech Spec was created in Step 2.**
+
 **IMPORTANT: Do NOT proceed to implementation without user approval of the Tech Spec.**
 
 After writing the Tech Spec markdown file:
 
 1. **Present the Tech Spec**
+
    - Inform the user that the Tech Spec has been created
    - Provide the file path to the Tech Spec markdown file
    - Clearly indicate that this is a proposed specification awaiting approval
 
 2. **Request Feedback**
+
    - Explicitly ask the user to review the Tech Spec file
    - Request approval or revision requests
    - Wait for user response before proceeding
 
 3. **Iterate Based on Feedback**
+
    - If the user requests changes, update the Tech Spec file accordingly
    - Re-present the updated spec for approval
    - Repeat until the user gives final approval
 
 4. **Proceed Only After Approval**
-   - Only after receiving explicit user approval, move to the next step (Write TODO Markdown)
-   - Do NOT start writing code or creating TODO lists without approval
+   - Only after receiving explicit user approval, move to the next step (Plan Execution)
+   - Do NOT start writing code or creating task lists without approval
 
-### 4. Write TODO Markdown
+### 4. Plan Execution
 
-Based on the Tech Spec, create a concrete execution plan in a TODO Markdown document. This document should include:
+Based on the approved Tech Spec (if created) or the clarified requirements, create an execution plan:
+
+- **If Tech Spec was created**: Create a concrete execution plan in a TODO Markdown document
+- **If Tech Spec was skipped**: Use the TodoWrite tool to create a task list for simple implementations
+
+The execution plan should include:
 
 - Detailed list of execution tasks
 - Priority and order for each task
@@ -77,12 +103,14 @@ Based on the Tech Spec, create a concrete execution plan in a TODO Markdown docu
 
 For each task, perform the following verification process:
 
-1. **Use Context7 MCP**
-   - ALWAYS use Context7 MCP when writing or modifying code
-   - Context7 MCP provides enhanced code context and understanding capabilities
+1. **Use context7 MCP**
+
+   - ALWAYS use context7 MCP when writing or modifying code
+   - context7 MCP provides enhanced code context and understanding capabilities
    - This ensures better code quality and consistency across the codebase
 
 2. **Leverage Specialized Sub-Agents**
+
    - Actively use specialized sub-agents appropriate for the task type
    - Sub-agents provide domain-specific expertise and optimized tooling
    - Examples of when to use specific agents:
@@ -96,11 +124,13 @@ For each task, perform the following verification process:
    - Use multiple agents in parallel when appropriate to maximize efficiency
 
 3. **Check Project Configuration**
+
    - Verify formatter configuration (e.g., Prettier, Black, etc.)
    - Verify linter configuration (e.g., ESLint, Pylint, etc.)
    - Verify type checker configuration (e.g., TypeScript, mypy, etc.)
 
 4. **Run Verification Commands**
+
    - Execute commands for the validation tools configured in the project
    - Task is considered complete only when all verifications pass
 
@@ -113,10 +143,21 @@ For each task, perform the following verification process:
 After completing formatting, linting, and type checking, proceed with the following process:
 
 1. **Code Review via Sub-Agent**
-   - Execute the code-reviewer agent to review the written code
-   - Review from the perspectives of code quality, security, and maintainability
+
+   - For simple to moderate changes:
+     - Execute the code-reviewer agent to review the written code
+     - Review from the perspectives of code quality, security, and maintainability
+
+   - For complex changes (multiple files, architectural changes, critical features):
+     - Suggest using the codex-claude-loop skill for comprehensive review
+     - Ask user (via `AskUserQuestion`) whether to proceed with codex-claude-loop workflow
+     - If user accepts, use the codex-claude-loop skill to perform iterative review and validation with Codex
+     - This provides a dual-AI review process where Claude implements and Codex validates
+     - The loop continues until code quality standards are met through continuous feedback
+     - **Fallback**: If codex command fails or codex-claude-loop encounters errors, fall back to using the code-reviewer sub-agent for code review instead
 
 2. **Integrate Feedback**
+
    - Analyze feedback from the code review
    - Fix areas that need improvement
    - Perform verification process (Step 4) again after fixes
