@@ -32,8 +32,8 @@
       }
     ]
   },
-  "alwaysThinkingEnabled": true,
-  "installMethod": "npm-global",
+  "cleanupPeriodDays": 365,
+  "includeCoAuthoredBy": true,
   "feedbackSurveyState": {
     "lastShownTime": 1754035252257
   },
