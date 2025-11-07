@@ -1,32 +1,41 @@
 #!/bin/bash
-# Read JSON input from stdin
+
+# Status line with directory, git branch, and Node.js version
+
+# Read input JSON
 input=$(cat)
 
-# Extract values using jq
-MODEL_DISPLAY=$(echo "$input" | jq -r '.model.display_name')
-CURRENT_DIR=$(echo "$input" | jq -r '.workspace.current_dir')
+# Get current directory from workspace
+current_dir=$(echo "$input" | jq -r '.workspace.current_dir')
 
-# Color codes
-ORANGE="\033[38;5;220m"
-LIME_GREEN="\033[38;5;154m"
-RESET="\033[0m"
+# Extract directory name
+dir_name=$(basename "$current_dir")
 
-# Show git branch if in a git repo
-GIT_BRANCH=""
-if git rev-parse --git-dir > /dev/null 2>&1; then
-    BRANCH=$(git branch --show-current 2>/dev/null)
-    if [ -n "$BRANCH" ]; then
-        GIT_BRANCH=" | $BRANCH"
-    fi
+# Get git branch (skip optional locks for performance)
+branch=$(cd "$current_dir" && git -c core.useOptionalLocks=false rev-parse --abbrev-ref HEAD 2>/dev/null)
+
+# Get Node.js version
+node_version=$(node --version 2>/dev/null)
+
+# ANSI color codes
+CYAN='\033[96m'
+LIGHT_PINK='\033[95m'
+LIGHT_GREEN='\033[92m'
+RESET='\033[0m'
+
+# Icons (using Nerd Font icons)
+GIT_ICON="󰘬"
+NODE_ICON=""
+
+# Build status line with colors
+result=$(printf "${CYAN}%s${RESET}" "$dir_name")
+
+if [ -n "$branch" ]; then
+  result="${result}$(printf " on ${LIGHT_PINK} %s${RESET}" "$branch")"
 fi
 
-# Show Node.js version if installed
-NODE_VERSION=""
-if command -v node > /dev/null 2>&1; then
-    VERSION=$(node -v 2>/dev/null)
-    if [ -n "$VERSION" ]; then
-        NODE_VERSION=" | ${LIME_GREEN}${VERSION}${RESET}"
-    fi
+if [ -n "$node_version" ]; then
+  result="${result}$(printf " via ${LIGHT_GREEN} %s${RESET}" "$node_version")"
 fi
 
-echo -e "${ORANGE}${MODEL_DISPLAY}${RESET} | ${CURRENT_DIR##*/}$GIT_BRANCH$NODE_VERSION"
+printf "%s\n" "$result"

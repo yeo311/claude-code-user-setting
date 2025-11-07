@@ -37,5 +37,9 @@
   "feedbackSurveyState": {
     "lastShownTime": 1754035252257
   },
-  "defaultMode": "plan"
+  "defaultMode": "plan",
+  "statusLine": {
+    "type": "command",
+    "command": "bash /Users/jihoonyeo/.claude/statusline.sh"
+  }
 }
